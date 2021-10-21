@@ -152,7 +152,7 @@ function attack_handshake(){
 			tput cnorm
 			echo -ne "\n${blue}[]${end}${yellow} Ingrese la ruta de su diccionario: ${end}" && read dir_dicc
 			xterm -hold -bg \#2C2C2C -fg \#FFFFFF -T "Fuerza bruta" -e "aircrack-ng -w $dir_dicc $ handshake_pcap/captura-01.cap " &
-7			tput civis
+			tput civis
 		elif [[ option -eq 3 ]]; then
 			attack_eviltwin $essid_ap $channel_ap
 			ctrl_c
