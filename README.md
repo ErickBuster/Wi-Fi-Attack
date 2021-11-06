@@ -11,7 +11,7 @@ chmod +x wifi-Atack.sh
 ```
 ### Modo de Uso
 ```
-./wifi-Atack.sh!
+./wifi-Atack.sh
 ```
 ![Menu](https://user-images.githubusercontent.com/91999629/138252631-1ac671e4-ec54-4ff7-8614-9fa9d7982047.jpg)
 
