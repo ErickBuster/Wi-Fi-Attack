@@ -51,7 +51,7 @@ para este ataque se realiza de la siguiente manera:
  
  
 ## EvilTwin
-Este tipo de ataque genera de fornma atomatizada un punto de Acceso falso (Fake AP), en el cual dispone de varias plantillas<br>
+Este tipo de ataque genera de forma automatizada un punto de Acceso falso (Fake AP), en el cual dispone de varias plantillas<br>
 Cabe destacar que podemos agregar mas plantillas personalizadas en la carpeta websites, agregamos la carpeta con el contenido de la plantilla personalizada<br>
 O tambien puedes descargar mas plantillas personalizadas en mi github [Plantillas](https://github.com/ErickBuster/websites)
 > Hay que tener en cuenta que para el ataque EvilTwin necesitamos tener una conexion a internet desde una interfaz de red eth0 o alguna otra, (posteriormente se añadiera para que funcione sin una conexion a internet previa)
