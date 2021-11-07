@@ -1,7 +1,7 @@
 # Wifi-Attack
 Es una herramienta escrita en bash y python cuyo objetivo realiza diversos ataques a redes wifi que son los siguientes: <br>
 - Ataque Handshake
-- Ataque PKMID
+- Ataque PMKID
 - EvilTwin                                                                                                                                                                       
 ## Instalacion 
 ```
@@ -37,15 +37,15 @@ Lo que la victima veria en su red wifi seria lo siguiente:
 ![Evil-Mobile](https://user-images.githubusercontent.com/91999629/138371103-13975000-cf53-4b75-957d-7661fab45c99.gif)
 
 
-## Ataque PKMID
+## Ataque PMKID
 Este ataque describe una tecnica para descifrar constraseñas WPA PSK "clave precompartida" (Pre-Shared Key)<br>
 El cual no se requiere algun ataque de desautenticacion, ya que el atacante se comunica directamente con el AP (Se conoce como ***ataque sin cliente***)
 para este ataque se realiza de la siguiente manera:
 ```
-./wifi-Attack.sh -m PKMID -i wlan0
-./wifi-Attack.sh -m PKMID -i wlan0 -w wordlist
+./wifi-Attack.sh -m PMKID -i wlan0
+./wifi-Attack.sh -m PMKID -i wlan0 -w wordlist
 ```
-![PKMID](https://user-images.githubusercontent.com/91999629/138373133-528801e9-4c8c-42c2-a6fd-41c106e61b8e.gif)
+![PMKID](https://user-images.githubusercontent.com/91999629/138373133-528801e9-4c8c-42c2-a6fd-41c106e61b8e.gif)
  
  Obtendra un archivo cap y con la utileria **hcxpcaptool** obtendra los hashes de la captura pcap para asi descifrarlo con **Hashcat** para asi descifrar la contraseña de la red
  
